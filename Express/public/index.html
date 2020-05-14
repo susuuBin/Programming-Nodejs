@@ -5,6 +5,44 @@
         <title> index </title>
     </head>
     <body>
+        <style>
+            @font-face { font-family: 'yg-jalnan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff'); font-weight: normal; font-style: normal; }
+            
+            body {
+                font-family: 'yg-jalnan';
+                font-weight: normal; font-style: normal;
+                color: #2E2E2E;
+                text-align: center;
+            }
+
+            .button {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                -ms-appearance: none;
+                -o-appearance: none;
+                appearance: none;
+                    color: #fff;
+                background-color: #FFE375;
+                border-color: #FFE375;
+                font-family: 'yg-jalnan';  
+                font-weight: normal; font-style: normal;
+                font-size: 17pt;
+                border: 0;
+                outline: 0;
+                    display: inline-block;
+                    line-height: normal;
+                    vertical-align: middle;
+                    cursor: pointer;
+                border-radius: .25em;
+                padding: 11px 20px 11px 20px;
+                text-align: center;
+            }
+
+            .button:focus{
+                background-color: #F7C800;
+            }
+        </style>
         <h1> index 입니다. </h1>
+        <button class="button" type="button" onclick="location.href='login2.html'"> 로그인 </button>
     </body>
 </html>

@@ -5,10 +5,19 @@
         <title> 로그인 테스트 </title>
     </head>
     <body>
+        <style>
+            @font-face { font-family: 'yg-jalnan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff'); font-weight: normal; font-style: normal; }
+            
+            body {
+                font-family: 'yg-jalnan';
+                font-weight: normal; font-style: normal;
+                color: #2E2E2E;
+            }
+        </style>
         <h1> 로그인 </h1>
         <br>
         <form method="POST" action="/process/login">
-            <tale>
+            <table>
                 <tr>
                     <td><label> 아이디 </label></td>
                     <td><input type="text" name="id"></td>
@@ -17,7 +26,7 @@
                     <td><label> 비밀번호 </label></td>
                     <td><input type="password" name="password"></td>
                 </tr>
-            </tale>
+            </table><br>
             <input type="submit" value="전송" name="">
         </form>  
     </body>
