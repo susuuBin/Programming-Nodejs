@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Vertical Button Gruop </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<style>
+    h2, .h2 {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .btn-group-vertical, .btn-group {
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+</style>
+<div class="container">
+  <h2 class="text-primary"> My Portfolio </h2>
+  <div class="btn-group-vertical">
+    <button type="button" class="btn btn-primary"> 나의 소개 </button>
+    <button type="button" class="btn btn-primary"> 강의 시간 </button>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+       나의 작품
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#"> 오디오 실행 </a>
+        <a class="dropdown-item" href="#"> 비디오 실행 </a>
+        <a class="dropdown-item" href="#"> 사진 이동 </a>
+        <a class="dropdown-item" href="#"> 달력 </a>
+        <a class="dropdown-item" href="#"> 나의 지도 </a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

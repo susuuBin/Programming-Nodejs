@@ -53,58 +53,47 @@ var router = express.Router();
 router.route('/process/photo').post(upload.array('photo', 1), function(req, res){
     console.log('/process/photo 호출됨.');
 
-    var paramId = req.body.id || req.query.id;
-    var paramPassword = req.body.password || req.query.password;
+    try {
+        var files = req.files;
 
-    if(req.session.user){
-        console.log("이미 로그인이 되어 상품 페이지로 이동합니다.");
+        console.dir("# ====== 업로드가 된 첫 번째 파일 정보 ===== #");
+        console.dir(req.files[0]);
+        console.dir("# ====== #");
+        
+        var originalname = '',
+            filename = '',
+            mimetype = '',
+            size = 0;
 
-        res.redirect('/public/product.html');
-    } else {
-        req.session.user = {
-            id: paramId,
-            name: "양수빈",
-            authorized: true
-        };
+        if (Array.isArray(files)){
+            console.log("배열에 들어있는 파일 갯수 : %d", files.length);
+
+            for(var index = 0; index < files.length; index++){
+                originalname = files[index].originalname;
+                filename = files[index].fieldname;
+                mimetype = files[index].mimetype;
+                size = files[index].size;
+            }
+        } else {
+            console.log("파일 갯수 : 1");
+            originalname = files[index].originalname;
+            filename = files[index].fieldname;
+            mimetype = files[index].mimetype;
+            size = files[index].size;
+        }
+        console.log("현재 파일 정보 : " + originalname + ', ' + filename + ", " + mimetype + ", " + size);
 
         res.writeHead('200', {'Content-Type' : 'text/html; charset=utf-8'});
-        res.write('<h1> 로그인 성공 </h1>');
-        res.write('<div><p> Param id : ' + paramId + '</p></div>');
-        res.write('<div><p> Param password : ' + paramPassword + '</p></div>');
-        res.write('<br><br><a href="/process/product"> 상품 페이지로 이동하기 </a>');
+        res.write('<h1> 파일 업로드 성공 </h1>');
+        res.write("<hr>");
+        res.write("<p> 원본 파일명 : " + originalname + "-> 저장한 파일명 : " + filename + "</p>");
+        res.write("<p> MIME TYPE : " + mimetype + "</p>");
+        res.write("<p> 파일 크기 " + size + "</p>");
         res.end();
+        } catch(err){
+            console.dir(err.stack);
         }
     });
-
-    router.route('/process/logout').get(function(req, res){
-        console.log('/process/logout 호출됨.');
-
-        if(req.session.user){
-            console.log('로그아웃합니다.');
-
-            req.session.destroy(function(err){
-                if(err) { throw err; }
-
-                console.log('세션을 삭제하고 로그아웃되었습니다.');
-                res.redirect('/public/login2.html');
-            });
-        } else {
-            console.log('아직 로그인이 되어 있지 않습니다.');
-            
-            res.redirect('/public//login2.html');
-        }
-    });
-
-    router.route('/process/product').get(function(req, res){
-        console.log('/process/product 호출됨.');
-        if(req.session.user){
-            res.redirect('/public//product.html');
-        } else {
-            res.redirect('/public//login2.html');
-        }
-    });
-
-    app.use('/', router);
 
     app.use('/', router);
 
