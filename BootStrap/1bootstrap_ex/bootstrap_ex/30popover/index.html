@@ -14,22 +14,19 @@
   </script>
 </head>
 <body>
-
-<div class="container">
-  <h3>Popover Example</h3>
-  <a href="profile.html">내소개</a>
-  <a href="table.html">시간표</a>
-  <a href="board.html">게시판</a>
-  <a href="http://maps.google.com">구글지도</a>
-  <a href="lecture.html">강의</a>
-  <a href="midwav.html">음악파일</a>
-</div>
-
-<script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-});
-</script>
-
+  <div class="container">
+    <h3>Popover Example</h3>
+    <a href="profile.html" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="내 소개입니다."> 내 소개 </a>
+    <a href="table.html" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="시간표입니다."> 시간표 </a>
+    <a href="board.html" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="게시판입니다."> 게시판 </a>
+    <a href="https://maps.google.com" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="구글 지도"> 구글 지도 </a>
+    <a href="lecture.html" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="강의"> 강의 </a>
+    <a href="midmav.html" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="음악 감상을 해 보세요."> 음악 파일  </a>
+  </div>  
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();   
+    });
+  </script>
 </body>
 </html>
