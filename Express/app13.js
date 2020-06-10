@@ -1,11 +1,11 @@
 /**
- * 파일 업로드하기
+ * 웹서버 만들기
  * 
  * 웹브라우저에서 아래 주소의 페이지를 열고 웹페이지에서 요청
- *    http://localhost:3000/public/photo.html
- *
- * 파일업로드를 위해 클라이언트에서 지정한 이름은 photo 입니다.
- *
+ * http://localhost:3000/
+ * http://localhost:3000/login2.html
+ * http://localhost:3000/photo.html
+ * http://localhost:3000/house1585280388624.png
  */
 
 // Express 기본 모듈 불러오기
@@ -46,8 +46,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // public 폴더와 uploads 폴더 오픈
-app.use('/public', static(path.join(__dirname, 'public')));
-app.use('/uploads', static(path.join(__dirname, 'uploads')));
+// app.use('/public', static(path.join(__dirname, 'public')));
+// app.use('/uploads', static(path.join(__dirname, 'uploads')));
+app.use('/', static(path.join(__dirname, 'public')));
+app.use('/', static(path.join(__dirname, 'uploads')));
+
 
 // cookie-parser 설정
 app.use(cookieParser());
@@ -71,7 +74,7 @@ var storage = multer.diskStorage({
         callback(null, 'uploads')
     },
     filename: function (req, file, callback) {
-        //callback(null, file.originalname + Date.now())
+        /*callback(null, file.originalname + Date.now())*/
 		//callback(null, file.originalname)
 		var extension = path.extname(file.originalname);
 		var basename = path.basename(file.originalname, extension);
@@ -87,12 +90,23 @@ var upload = multer({
 	}
 });
 
-
 // 라우터 사용하여 라우팅 함수 등록
 var router = express.Router();
 
+router.route('/process/login2').post(function(req, res) {
+	console.log('/process/login 호출됨.');
+	// 클라이언트에 응답 전송
+	res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+	res.write('<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">');
+	res.write('<br><br>&nbsp;&nbsp;<font size =5 color =gray>로그인 성공</font><br><br>');
+	res.write('<hr/>');
+	res.write('<br>&nbsp;&nbsp<font color =gray size=3>업로드하는 사진이 있으면 페이지 이동!!!</font></p>');
+	res.write('&nbsp;&nbsp;<a href = /photo.html><input type= button value= "파일업로드 페이지로 이동"> </input></a>');				
+	res.end();
+});
+
 // 파일 업로드 라우팅 함수 - 로그인 후 세션 저장함
-router.route('/process/photo').post(upload.array('photo1', 1), function(req, res) {
+router.route('/process/photo').post(upload.array('photo', 1), function(req, res) {
 	console.log('/process/photo 호출됨.');
 	
 	try {
@@ -132,11 +146,13 @@ router.route('/process/photo').post(upload.array('photo1', 1), function(req, res
 		
 		// 클라이언트에 응답 전송
 		res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-		res.write('<h3>파일 업로드 성공</h3>');
+		res.write('<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">');
+		res.write('<br><br>&nbsp;&nbsp;<font size =5 color =gray>파일업로드 성공</font><br><br>');
 		res.write('<hr/>');
-		res.write('<p>원본 파일명 : ' + originalname + ' -> 저장 파일명 : ' + filename + '</p>');
-		res.write('<p>MIME TYPE : ' + mimetype + '</p>');
-		res.write('<p>파일 크기 : ' + size + '</p>');
+		res.write('<br>&nbsp원본 파일명 : ' + originalname +'<br>&nbsp저장 파일명 : ' + filename );
+		res.write('<br>&nbsp;MIME TYPE : ' + mimetype );
+		res.write('<br>&nbsp;파일  크기 : ' + size );
+		res.write('<br><br>&nbsp;&nbsp;<a href = /><input type= button value= "포트폴리오 화면으로 이동"></input></a>');			
 		res.end();
 		
 	} catch(err) {
@@ -144,7 +160,8 @@ router.route('/process/photo').post(upload.array('photo1', 1), function(req, res
 	}	
 		
 });
- 
+
+
 app.use('/', router);
 
 
@@ -158,9 +175,9 @@ var errorHandler = expressErrorHandler({
 app.use( expressErrorHandler.httpError(404) );
 app.use( errorHandler );
 
-
 // Express 서버 시작
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
 
