@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+=======
+/**
+ * 데이터베이스 사용하기
+ * 
+ * 몽고디비에 사용자 추가하기
+ 
+ * 웹브라우저에서 아래 주소의 페이지를 열고 웹페이지에서 요청
+ *    http://localhost:3000/public/adduser.html
+ */
+
+>>>>>>> 3b7e13e54a5e1dee0b62af489255faadf483a2fd
 
 // Express 기본 모듈 불러오기
 var express = require('express')
@@ -195,6 +207,33 @@ var authUser = function(database, id, password, callback) {
 //사용자를 추가하는 함수
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 3b7e13e54a5e1dee0b62af489255faadf483a2fd
 // 404 에러 페이지 처리
 var errorHandler = expressErrorHandler({
  static: {
