@@ -27,8 +27,10 @@ var expressErrorHandler = require('express-error-handler');
 var expressSession = require('express-session');
  
 // mongoose 모듈 사용
-
-
+var mongoose = require('mongoose');
+var database;
+var UserSchema;
+var UserModel;
 
 // 익스프레스 객체 생성
 var app = express();
@@ -59,54 +61,37 @@ app.use(expressSession({
 
 
 //===== 데이터베이스 연결 =====//
+function connectDB() {
+	var databaseUrl = "mongodb://localhost:27017/local";
 
+	console.log("데이터베이스 연결을 시도합니다.");
+	mongoose.Promise = global.Promise;
+	mongoose.connect(databaseUrl);
+	database = mongoose.connection;
 
+	database.on('error', console.error.bind(console, 'moongoose connection error.'));
+	database.on('open', function(){
+		console.log("데이터베이스에 연결되었습니다. : " + databaseUrl);
 
+		UserSchema = mongoose.Schema({
+			id: String,
+			name: String,
+			password: String
+		});
 
+		console.log("UserSchema 정의함.");
 
+		/* User Model 정의 */
+		UserModel = mongoose.model("users", UserSchema);
+		console.log("UserModel 정의함.");
+	});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/* 연결이 끊어졌을 때, 5 초 후에 재연결 */
+	database.on('disconnected', function(){
+		console.long("연결이 끊어졌습니다. 5 초 후에 재연결합니다.");
+		setInterval(connectDB, 5000);
+	});
+}
 
 //===== 라우팅 함수 등록 =====//
 
@@ -202,52 +187,62 @@ router.route('/process/adduser').post(function(req, res) {
 app.use('/', router);
 
 
-
 // 사용자를 인증하는 함수(app2.js)
 var authUser = function(database, id, password, callback) {
 	console.log('authUser 호출됨 : ' + id + ', ' + password);
 	
-    // users 컬렉션 참조
-	var users = database.collection('users');
-
-    // 아이디와 비밀번호를 이용해 검색
-	users.find({"id":id, "password":password}).toArray(function(err, docs) {
-		if (err) { // 에러 발생 시 콜백 함수를 호출하면서 에러 객체 전달
+	UserModel.find({"id" : id, "password": password}, function(err, results) {
+		if(err){
 			callback(err, null);
 			return;
 		}
-		
-	    if (docs.length > 0) {  // 조회한 레코드가 있는 경우 콜백 함수를 호출하면서 조회 결과 전달
-	    	console.log('아이디 [%s], 패스워드 [%s] 가 일치하는 사용자 찾음.', id, password);
-	    	callback(null, docs);
-	    } else {  // 조회한 레코드가 없는 경우 콜백 함수를 호출하면서 null, null 전달
-	    	console.log("일치하는 사용자를 찾지 못함.");
-	    	callback(null, null);
-	    }
-	});
-}
 
+		console.log("아이디[%s], 비밀번호 [%s]로 사용자를 검색한 결과 ", id, password);
+		console.dir(results);
+
+		if(results.length > 0){
+			console.log("일치하는 사용자를 찾았습니다.", id, password);
+			callback(null, results);
+		} else {
+			console.log("일치하는 사용자를 찾지 못했습니다.");
+			callback(null, null);
+		}
+	});
+};
 
 //사용자를 추가하는 함수(app2.js)
 var addUser = function(database, id, password, name, callback) {
 	console.log('addUser 호출됨 : ' + id + ', ' + password + ', ' + name);
-	// users 컬렉션 참조
-	var users = database.collection('users');
-	// id, password, username을 이용해 사용자 추가
-	users.insertMany([{"id":id, "password":password, "name":name}], function(err, result) {
-		if (err) {  // 에러 발생 시 콜백 함수를 호출하면서 에러 객체 전달
+	// UserModel 인스턴스 생성
+	var user = new UserModel({"id" : id, "password" : password, "name" : name});
+
+	/* save() 로 저장 : 저장 성공 시, addedUser 객체가 파라미터로 전달됨 */
+	user.save(function(err, addedUser){
+		if(err) {
 			callback(err, null);
 			return;
 		}
-        // 에러 아닌 경우, 콜백 함수를 호출하면서 결과 객체 전달
-        if (result.insertedCount > 0) {
-	        console.log("사용자 레코드 추가됨 : " + result.insertedCount);
-        } else {
-            console.log("추가된 레코드가 없음.");
-        }
-    callback(null, result);
+
+		console.log("사용자 데이터를 추가함.");
+		callback(null, addedUser);
 	});
-}
+};
+
+// 	// id, password, username을 이용해 사용자 추가
+// 	users.insertMany([{"id":id, "password":password, "name":name}], function(err, result) {
+// 		if (err) {  // 에러 발생 시 콜백 함수를 호출하면서 에러 객체 전달
+// 			callback(err, null);
+// 			return;
+// 		}
+//         // 에러 아닌 경우, 콜백 함수를 호출하면서 결과 객체 전달
+//         if (result.insertedCount > 0) {
+// 	        console.log("사용자 레코드 추가됨 : " + result.insertedCount);
+//         } else {
+//             console.log("추가된 레코드가 없음.");
+//         }
+//     callback(null, result);
+// 	});
+// }
 
 // 404 에러 페이지 처리
 var errorHandler = expressErrorHandler({
