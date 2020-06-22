@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Alert Custom -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="css/member.css" rel="stylesheet"/>
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+    <!-- FAVICON -->
+		<link rel="shortcut icon" href="images/favicon.png">
+		<link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+    <!-- BOOTSTRAP -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <title> 들숨날숨 </title>
+
+  </head>
+  <body translate="no">
+
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+      <div class="container">
+          <a class="navbar-brand js-scroll-trigger" href="index.html"><img  src="images/logo.png"></a>
+          <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" font-color="#2B2B2B"> Menu <i class="fas fa-bars"></i></button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.html"> 포트폴리오 </a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="photo.html"> 사진 업로드 </a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="product.html"> 가수 </a></li>
+              </ul>
+          </div>
+      </div>
+    </nav>
+    <div class="user-modal" style="margin-top: 20px;">
+      <div class="user-modal-container" style="margin-top: 200px;">
+        <ul class="switcher">
+          <li><a href="#0"> 로그인 </a></li>
+          <li><a href="#0"> 회원가입 </a></li>
+        </ul>
+      <div id="login">
+        <form class="form" method="POST" action="/process/login">
+          <p class="fieldset">
+            <label class="image-replace id" for="member_id"> ID </label>
+            <input class="full-width has-padding has-border" name = "id" id="id" type="text" placeholder="ID">
+          </p>
+          <p class="fieldset">
+            <label class="image-replace password" for="pwd"> Password </label>
+            <input class="full-width has-padding has-border" id="password" name="password" type="password" placeholder="Password"> 
+            <a href="#0" class="hide-password"> Show </a>
+          </p>
+        <p class="fieldset">
+          <input class="full-width" type="submit" value="로그인" onclick="return check();">
+        </p>
+      </form>
+    </div>
+
+    <div id="signup">
+      <form name="signup" class="form" method="POST" action="/process/addUser">
+        
+        <p class="fieldset">
+          <label class="image-replace id" for="signup_member_id"> ID </label>
+          <input class="full-width has-padding has-border" name = "id" id="id" type="text" placeholder="ID">
+        </p>
+        <p class="fieldset">
+          <label class="image-replace password" for="pwd"> Password </label>
+          <input class="full-width has-padding has-border" name = "password" id="password" type="password" placeholder="Password">
+          <a href="#0" class="hide-password"> Show </a>
+        </p>
+        <p class="fieldset">
+          <label class="image-replace id" for="signup_member_id"> Name </label>
+          <input class="full-width has-padding has-border" name = "name" id="name" type="text" placeholder="Name">
+        </p>
+        <!-- <p class="fieldset">
+          <label class="image-replace name" for="name"> Name </label>
+          <input class="full-width has-padding has-border" name = "name" id="name" type="text" placeholder="Name">
+        </p> -->
+        <!-- <div class="filebox bs3-primary preview-image">
+          <input class="upload-name" value="파일 선택" disabled="disabled" style="width: 300px;">
+          <label for="imgFile"> 업로드 </label>
+          <input type="file" name="imgFile" id="imgFile" class="upload-hidden" accept="image/jpg,image/gif, image/jpeg, image/png">
+        </div> -->
+        <p class="fieldset">
+          <input class="full-width has-padding" type="submit" value="회원가입" onclick="return checkAll();">
+        </p>
+  </form>
+</div>
+</div>
+</div>
+    <!-- JAVASCRIPT -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='https://code.jquery.com/jquery-1.11.3.min.js '></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="js/member.js"></script>
+</body>
+
+</html>

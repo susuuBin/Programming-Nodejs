@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> 들숨날숨 </title>
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONTS -->
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="css/flickity.css" />
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<!-- Font Awesome -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<!--JAVASCRIPT -->
+	<script src="js/modernizr.custom.js"></script>
+</head>
+<body>
+	<div class="bar">
+		<div class="filter">
+            <span class="filter__label"> 분류 </span>
+            <span class="filter__label" onclick="location.href='photo.html'" style="cursor: pointer;"> 앨범 </span>
+			<button class="action filter__item filter__item--selected" data-filter="*"> 모두 보기 </button>
+			<button class="action filter__item" data-filter=".ballade"><span class="action__text"> 발라드 </span></button>
+			<button class="action filter__item" data-filter=".dance"><span class="action__text"> 댄스 / 팝 </span></button>
+			<button class="action filter__item" data-filter=".idol"><span class="action__text"> 아이돌 </span></button>
+			<button class="action filter__item" data-filter=".indy"><span class="action__text"> 인디 </span></button>
+            <button class="action filter__item" data-filter=".rap"><span class="action__text"> 랩 / 힙합</span></button>
+		</div>
+		<button class="cart">
+            <a href="/process/logout" class="checkID"> 로그아웃 </a>
+			<i class="cart__icon fa fa-shopping-cart"></i>
+			<span class="text-hidden"> Shopping cart </span>
+            <span class="cart__count"> 0 </span>
+		</button>
+	</div>
+	<!-- Main view -->
+	<div class="view">
+		<section class="grid grid--loading">
+			<img class="grid__loader" src="images/grid.svg" width="60" alt="Loader image" />
+			<div class="grid__sizer"></div>
+			<div class="grid__item ballade">
+				<div class="slider">
+					<div class="slider__item"><img src="images/ballade1.gif" alt="Dummy" style="margin-top: 5%;" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> 슬기로운 의사생활 OST Part 12 </h3>
+                    <span class="meta__brand"> 너에게 난, 나에게 넌  </span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden"> 장바구니 담기 </span></button>
+			</div>
+			<div class="grid__item dance">
+				<div class="slider">
+					<div class="slider__item"><img src="images/dance3.jpg" alt="Dummy" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> 'The ReVe Festival' Finale </h3>
+					<span class="meta__brand"> Psycho </span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden"> 장바구니 담기 </span></button>
+			</div>
+			<div class="grid__item idol">
+				<div class="slider">
+					<div class="slider__item"><img src="images/idol.gif" alt="Dummy" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> Delight - The 2nd Mini Album </h3>
+					<span class="meta__brand"> Candy </span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden"> 장바구니 담기 </span></button>
+			</div>
+			<div class="grid__item grid__item--size-a indy">
+				<div class="slider">
+                    <div class="slider__item"><img src="images/indy2.jpg" alt="Dummy" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> 사춘기집 || 꽃 본 나비 </h3>
+					<span class="meta__brand"> 나비와 고양이 </span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden">장바구니 담기</span></button>
+			</div>
+			<div class="grid__item rap">
+				<div class="slider">
+					<div class="slider__item"><img src="images/rap1.jpg" alt="Dummy" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> MY LIFE愛 </h3>
+					<span class="meta__brand"> 깡 </span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden">장바구니 담기</span></button>
+			</div>
+			<div class="grid__item grid__item--size-a ballade">
+				<div class="slider">
+					<div class="slider__item"><img src="images/ballade2.png" alt="Dummy" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> 사랑의 불시착 OST Part 11 </h3>
+					<span class="meta__brand"> 사랑을 드려요 </span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden">장바구니 담기</span></button>
+			</div>
+			<div class="grid__item dance">
+				<div class="slider">
+					<div class="slider__item"><img src="images/dance.jpg" alt="Dummy" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> 에잇(Prod.&Feat. SUGA of BTS) </h3>
+					<span class="meta__brand"> 아이유 </span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden"> 장바구니 담기 </span></button>
+			</div>
+			<div class="grid__item indy">
+				<div class="slider">
+					<div class="slider__item"><img src="images/indy.jpg" alt="Dummy" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> 슬기로운 의사생활 OST Part 3 </h3>
+					<span class="meta__brand"> 아로하 </span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden"> 장바구니 담기 </span></button>
+			</div>
+			<div class="grid__item dance">
+				<div class="slider">
+					<div class="slider__item"><img src="images/dance2.jpg" alt="Dummy" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> NONSTOP </h3>
+					<span class="meta__brand"> 오마이걸 (OH MY GIRL) </span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden"> 장바구니 담기 </span></button>
+			</div>
+			<div class="grid__item idol">
+				<div class="slider">
+                    <div class="slider__item"><img src="images/idol2.jpg" alt="Dummy" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> NCT #127 Neo Zone - The 2nd Album </h3>
+					<span class="meta__brand"> 영웅 (英雄; Kick It)</span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden">장바구니 담기</span></button>
+			</div>
+			<div class="grid__item rap">
+				<div class="slider">
+					<div class="slider__item"><img src="images/rap2.png" alt="Dummy" /></div>
+				</div>
+				<div class="meta">
+					<h3 class="meta__title"> Uh-Oh </h3>
+					<span class="meta__brand"> (여자)아이들</span>
+				</div>
+				<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden"> 장바구니 담기 </span></button>
+			</div>
+
+		</section>
+		<!-- /grid-->
+	</div>
+	<!-- /view -->
+	<script src="js/isotope.pkgd.min.js"></script>
+	<script src="js/flickity.pkgd.min.js"></script>
+	<script src="js/product.js"></script>
+</body>
+</html>
